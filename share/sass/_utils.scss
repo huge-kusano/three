@@ -1,0 +1,195 @@
+
+// ==========================================================================
+// util
+// ========================================================================== */
+
+@mixin container {
+  // max-width: $pageMaxWidth - ( 67 * 2 );
+  max-width: $pageMaxWidth;
+  margin: 0 auto;
+  // padding: 0 67px;
+  padding: 0 30px;
+  // @include max-screen( $breakpoint-base ) {
+  //   // min-width: 728px;
+  //   padding-left: 20px;
+  //   padding-right: 20px;
+  // }
+  @include max-screen( $breakpoint-small ) {
+    min-width: 280px;
+    padding: 0 20px;
+  }
+  @include ie8 () {
+    min-width: $breakpoint-base;
+  }
+}
+
+@mixin defaultLink () {
+  color: $colorBlack;
+  transition: color .2s;
+  &:hover,&:active{
+    color: $colorLinkHover;
+    text-decoration: none;
+    outline:none;
+    transition: color 0s;
+  }
+}
+
+@mixin s5-link ( $bool:false ) {
+  color: $colorBlack;
+  cursor: pointer;
+  &:before{
+    @include icon ( right );
+    margin: 0 .4em .1em 0;
+  }
+  @if $bool {
+    
+  } @else {
+    &:hover,&:active{
+      color: $colorLinkHover;
+      text-decoration: none;
+      outline:none;
+    }
+  }
+}
+
+@mixin hoverEffect () {
+  color: inherit;
+  transition: opacity .2s;
+  img{
+    transition: opacity .2s;
+  }
+}
+@mixin hoverEffectHover () {
+  text-decoration: none;
+  -ms-filter: "alpha(opacity=80)";
+  opacity: 0.8;
+  transition: opacity 0;
+  img{
+    -ms-filter: "alpha(opacity=62.5)";
+    opacity: 0.625;
+    transition: opacity 0;
+    
+  }
+}
+
+@mixin imgHoverEffect () {
+  display: block;
+  transition: opacity .2s;
+}
+@mixin imgHoverEffectHover () {
+  -ms-filter: "alpha(opacity=50)";
+  opacity: .5;
+  transition: opacity 0;
+}
+
+@mixin gridContainer () {
+  font-size: 0;
+  text-align: justify;
+}
+
+
+// clearfix
+// ========================================================================== */
+@mixin clearfix () {
+  *zoom: 1;
+  &:before,
+  &:after {
+    content: "";
+    display: table; }
+  &:after { clear: both; }
+}
+
+// wordbreak
+// ========================================================================== */
+@mixin avoidselect {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+
+// wordbreak
+// ========================================================================== */
+@mixin wordbreak () {
+  white-space: normal;
+  word-break: break-word;
+  word-break: break-all;
+  hyphens: auto;
+}
+
+
+// font-size
+// ========================================================================== */
+
+// remove unit (e.g. 10px -> 10 )
+@function parseInt ( $x ) {
+  @return $x / ( 1 + $x - $x );
+}
+
+@function getFs ( $relativeSize, $unit ) {
+
+  $_fontsizeInPx: $_basefontsize + ( $relativeSize * 2 );
+  
+  @if ( $unit == 'px' ) {
+
+    @return $_fontsizeInPx;
+    
+  }
+
+  @if ( $unit == 'rem' ) {
+    
+    @return parseInt( $_fontsizeInPx ) / parseInt( $_basefontsize ) * 1rem;
+    
+  }
+
+  @return $_fontsizeInPx;
+
+}
+
+$_basefontsize: $font-size-desktop;
+@mixin max-screen ( $res ) {
+  @media screen and ( max-width: $res ) {
+    @if parseInt( $res ) <= parseInt( $breakpoint-base ) {
+      $_basefontsize: $font-size-desktop;
+    }
+    @if parseInt( $res ) <= parseInt( $breakpoint-middle ) {
+      $_basefontsize: $font-size-middlescreen;
+    }
+    @if parseInt( $res ) <= parseInt( $breakpoint-small ) {
+      $_basefontsize: $font-size-smallscreen;
+    }
+    @content;
+    $_basefontsize: $font-size-desktop;
+  }
+}
+
+
+// filter for only less than IE8 (CSS Hack)
+// ==========================================================================
+@mixin ie8 () {
+  // only for IE8
+  @media \0screen {
+    @content;
+  }
+}
+
+
+// for css3 prefix
+// ==========================================================================
+
+@mixin opacity ( $opacity ) {
+
+    @if $opacity == 1 {
+
+      filter: unquote("progid:DXImageTransform.Microsoft.Alpha(enabled=false)");
+      
+    } @else {
+
+      filter: unquote("progid:DXImageTransform.Microsoft.Alpha(Opacity=#{round($opacity * 100)})");
+      
+    }
+ 
+  opacity: $opacity;
+  
+}

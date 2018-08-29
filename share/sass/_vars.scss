@@ -1,0 +1,34 @@
+
+// ==========================================================================
+//  vars
+// ==========================================================================
+$colorLinkHover       : #7d8794;
+$colorStoreOrange     : #f5683a;
+
+$colorBlack           : #2f353d;
+
+$colorGray-light      : #ccc   ;
+$colorGray            : #83838f;
+
+$colorRed             : #c93434;
+
+$colorGreen           : #22c083;
+
+$colorBlue-light      : #55acee;
+$colorBlue            : #5887ab;
+$colorBlue-dark       : #3a5897;
+
+$colorOrange          : #f25529;
+
+// $fontSansSerif : '\30D2\30E9\30AE\30CE\89D2\30B4\20\50\72\6F\20\57\33', 'Hiragino Kaku Gothic Pro', '\30E1\30A4\30EA\30AA', Meiryo, '\FF2D\FF33\20\FF30\30B4\30B7\30C3\30AF', sans-serif;
+$fontSansSerif : sans-serif;
+
+$font-size-desktop: 16px;
+$font-size-middlescreen: 16px; // tablet
+$font-size-smallscreen: 14px;  // smartphone
+
+
+$pageMaxWidth: 1200px;
+$breakpoint-base   : 980px - 1;
+$breakpoint-middle : 768px - 1;
+$breakpoint-small  : 640px - 1;
